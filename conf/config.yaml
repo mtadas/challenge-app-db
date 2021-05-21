@@ -1,0 +1,42 @@
+# security group definition
+SecurityGroups:
+  rules:
+    -
+      ip: '10.0.30.0/24' # change to any IP range
+      port: 5432
+      desc: 'Allow sql access to private subnet'
+
+# Tag definition
+Tags:
+  -
+    name: 'Project'
+    value: 'challenge-app-db'
+
+#RDS settings
+Pattern:
+  nonprod:
+    vpcid: 'vpc-xxx' #update
+    storageEncrypted: false
+    multiAz: false
+    autoMinorVersionUpgrade: true
+    instanceType: 't3.micro'
+    allocatedStorage: 20 #Gb
+    backupRetention: 1 #days
+    deletionProtection: false
+    masterUsername: 'postgres'
+    port: 5432
+    preferredBackupWindow: '09:54-10:24'
+    preferredMaintenanceWindow: 'sat:07:00-sat:07:30'
+  prod:
+    vpcid: 'vpc-xxx' #update
+    storageEncrypted: false
+    multiAz: false
+    autoMinorVersionUpgrade: true
+    instanceType: 't3.micro'
+    allocatedStorage: 20 #Gb
+    backupRetention: 2 #days
+    deletionProtection: true
+    masterUsername: 'postgres'
+    port: 5432
+    preferredBackupWindow: '09:54-10:24'
+    preferredMaintenanceWindow: 'sat:07:00-sat:07:30'
